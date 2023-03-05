@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProductSerializer, ProducerSerializer, CategorySerializer
-from .models import Product,Producer,Category
+from .models import Product, Producer, Category
 
 class ProductAPIView(APIView):
     def get(self, request,pk):
@@ -29,15 +29,6 @@ class ProductAPIView(APIView):
         w.delete()
 
         return Response({'post':"delete post" + str(pk)})
-
-    def update(self, instance, validated_data,pk):
-        instance.title = validated_data.get('title', instance.title),
-        instance.size = validated_data.get('size', instance.size),
-        instance.producer_id = validated_data.get('producer_id', instance.producer_id),
-        instance.cat_id = validated_data.get('cat_id', instance.cat_id),
-        instance.cost = validated_data.get('cost', instance.cost),
-        instance.save()
-        return instance
 
     def put(self,request,*args,**kwargs):
         pk=kwargs.get('pk', None)
